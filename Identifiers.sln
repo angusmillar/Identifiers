@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identifiers", "Identifiers\Identifiers.csproj", "{96B4111F-C687-44F5-A02C-33F4B9029AB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identifiers.Test", "Identifiers.Test\Identifiers.Test.csproj", "{C6F90285-414C-405B-8034-E687D2212348}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96B4111F-C687-44F5-A02C-33F4B9029AB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B4111F-C687-44F5-A02C-33F4B9029AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96B4111F-C687-44F5-A02C-33F4B9029AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96B4111F-C687-44F5-A02C-33F4B9029AB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6F90285-414C-405B-8034-E687D2212348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6F90285-414C-405B-8034-E687D2212348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6F90285-414C-405B-8034-E687D2212348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6F90285-414C-405B-8034-E687D2212348}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
