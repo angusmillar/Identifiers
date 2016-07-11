@@ -7,7 +7,7 @@ namespace Identifiers.CheckDigitAlgorithm
 {
   public class Luhn
   {
-    public static string CheckDigitIs(string Ihi)
+    public static string GetCheckDigit(string Ihi)
     {
       if (!Support.StringSupport.IsDigitsOnly(Ihi))
       {
@@ -43,9 +43,6 @@ namespace Identifiers.CheckDigitAlgorithm
       }
 
       return value.ToString();
-    }
-
-    
-
+    }    
   }
 }

@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Australian\HealthcareIdentifier.cs" />
+    <Compile Include="Australian\NationalHealthcareIdentifier.cs" />
     <Compile Include="Australian\MedicareNumber.cs" />
     <Compile Include="Australian\MedicareProviderNumber.cs" />
     <Compile Include="CheckDigitAlgorithm\Luhn.cs" />
