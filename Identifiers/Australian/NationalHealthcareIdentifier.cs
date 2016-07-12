@@ -230,6 +230,9 @@ namespace Identifiers.Australian
     #endregion
 
     #region Public Static Properties
+    /// <summary>
+    /// Static properties for HL7 V2 Messages
+    /// </summary>
     public static class Hl7V2
     {
       public static class Ihi
@@ -269,6 +272,9 @@ namespace Identifiers.Australian
       }
     }
 
+    /// <summary>
+    /// Static properties for HL7 CDA Documents
+    /// </summary>
     public static class Hl7Cda
     {
       public static class Ihi
@@ -303,8 +309,6 @@ namespace Identifiers.Australian
     /// </summary>
     public static string RootHealthcareIdentifierOid { get { return "1.2.36.1.2001.1003.0"; } }
     
-
-
     #endregion
 
     #region Public Static Methods
