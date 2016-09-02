@@ -99,7 +99,7 @@ namespace Identifiers.Australian
     /// </summary>
     /// <param name="MedicareProviderNumber"></param>
     public MedicareProviderNumber()
-    {      
+    {
     }
     /// <summary>
     /// Constructor
@@ -109,5 +109,20 @@ namespace Identifiers.Australian
     {
       this.Value = MedicareProviderNumber;
     }
+
+    #region Public Static Properties
+
+    /// <summary>
+    /// Static properties for HL7 V2 Messages
+    /// </summary>
+    public static class Hl7V2
+    {
+      /// <summary>
+      ///e.g: ORC-16.9.1 (Ordering Provider)
+      /// </summary>
+      public static string AssigningAuthority { get { return "AUSHICPR"; } }
+    }
+
+    #endregion
   }
 }
