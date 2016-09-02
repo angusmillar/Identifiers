@@ -116,9 +116,11 @@ namespace Identifiers.Australian
       this.IRN = Irn;
       this.Expiry = Expiry;
     }
-
-    #region Public Static Properties
-
+    /// <summary>
+    /// Validate a Medicare Number
+    /// </summary>
+    /// <param name="MedicareNumber"></param>
+    /// <returns></returns>
     public static bool IsValid(string MedicareNumber)
     {
       MedicareNumber Id = null;
@@ -139,8 +141,12 @@ namespace Identifiers.Australian
       else
       {
         return false;
-      }      
+      }
     }
+   
+    #region Public Static Properties
+
+
 
 
     /// <summary>
