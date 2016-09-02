@@ -252,11 +252,11 @@ namespace Identifiers.Australian
         /// <summary>
         ///e.g: OBR-16.9 (Ordering Provider)
         /// </summary>
-        public static string AssigningAuthority { get { return "NI"; } }
+        public static string AssigningAuthority { get { return "AUSHIC"; } }
         /// <summary>
         /// e.g OBR-16.14 (Ordering Provider)
         /// </summary>
-        public static string AssigningFacility { get { return "AUSHIC"; } }
+        public static string AssigningFacility { get { return "NPI"; } }
       }
 
       public static class Hpi_O
