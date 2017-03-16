@@ -249,15 +249,15 @@ namespace Identifiers.Australian
 
       public static class Hpi_I
       {
-        /// <summary>
-        ///e.g: OBR-16.9 (Ordering Provider)
-        /// </summary>
-        public static string AssigningAuthority { get { return "AUSHIC"; } }
-        /// <summary>
-        /// e.g OBR-16.14 (Ordering Provider)
-        /// </summary>
-        public static string AssigningFacility { get { return "NPI"; } }
-      }
+                /// <summary>
+                ///e.g: OBR-16.9 (Ordering Provider)
+                /// </summary>
+                public static string AssigningAuthority => "AUSHIC";         
+                /// <summary>
+                /// e.g OBR-16.14 (Ordering Provider)
+                /// </summary>
+                public static string AssigningFacility => "NPI";
+            }
 
       public static class Hpi_O
       {

@@ -163,13 +163,13 @@ namespace Identifiers.Test
     [TestMethod]
     public void Test_HPI_I_Hl7_V2_AssigningAuthority()
     {
-      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7V2.Hpi_I.AssigningAuthority, "NI");
+      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7V2.Hpi_I.AssigningAuthority, "AUSHIC");
     }
 
     [TestMethod]
     public void Test_HPI_I_Hl7_V2_AssigningFacility()
     {
-      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7V2.Hpi_I.AssigningFacility, "AUSHIC");
+      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7V2.Hpi_I.AssigningFacility, "NPI");
     }
 
     [TestMethod]
