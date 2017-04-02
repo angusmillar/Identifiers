@@ -83,18 +83,14 @@ namespace Identifiers.Test
     [TestMethod]
     public void Test_IHI_GenerateRandomIHI()
     {
-      string ValidIhi = "8003608333428779";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      string NewRandom = oIhi.GenerateRandomHealthcareIdentifier(Australian.NationalHealthcareIdentifierType.Individual);
+      string NewRandom = Australian.NationalHealthcareIdentifier.GenerateRandomHealthcareIdentifier(Australian.NationalHealthcareIdentifierType.Individual);
       Assert.IsTrue(Australian.NationalHealthcareIdentifier.IsValid(NewRandom, Australian.NationalHealthcareIdentifierType.Individual));
     }
 
     [TestMethod]
     public void Test_IHI_GenerateRandomHPI_I()
     {
-      string ValidIhi = "8003608333428779";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      string NewRandom = oIhi.GenerateRandomHealthcareIdentifier(Australian.NationalHealthcareIdentifierType.Provider);
+      string NewRandom = Australian.NationalHealthcareIdentifier.GenerateRandomHealthcareIdentifier(Australian.NationalHealthcareIdentifierType.Provider);
       bool Result = Australian.NationalHealthcareIdentifier.IsValid(NewRandom, Australian.NationalHealthcareIdentifierType.Provider);
       Assert.IsTrue(Result);
     }
@@ -102,9 +98,7 @@ namespace Identifiers.Test
     [TestMethod]
     public void Test_IHI_GenerateRandomHPI_O()
     {
-      string ValidIhi = "8003608333428779";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      string NewRandom = oIhi.GenerateRandomHealthcareIdentifier(Australian.NationalHealthcareIdentifierType.Orginisation);
+      string NewRandom = Australian.NationalHealthcareIdentifier.GenerateRandomHealthcareIdentifier(Australian.NationalHealthcareIdentifierType.Orginisation);
       Assert.IsTrue(Australian.NationalHealthcareIdentifier.IsValid(NewRandom, Australian.NationalHealthcareIdentifierType.Orginisation));
     }
 

@@ -9,13 +9,13 @@ namespace Identifiers.Australian
   public class MedicareProviderNumber
   {
     //The Allowed Practice Location Values (PLV) and there positions
-    private char[] PracticeLocationValueChars = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    private static char[] PracticeLocationValueChars = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                                              'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K',
                                              'L', 'M', 'N', 'P', 'Q', 'R', 'T', 'U', 'V', 'W',
                                              'X', 'Y'};
 
     //The Allowed Check Characters and there positions
-    private char[] RemainderCheckCharacterChars = { 'Y', 'X', 'W', 'T', 'L', 'K', 'J', 'H', 'F', 'B', 'A' };
+    private static char[] RemainderCheckCharacterChars = { 'Y', 'X', 'W', 'T', 'L', 'K', 'J', 'H', 'F', 'B', 'A' };
 
     public string Value { get; set; }
     /// <summary>
@@ -111,6 +111,22 @@ namespace Identifiers.Australian
     }
 
     #region Public Static Properties
+
+    public static string GenerateRandomMedicareProviderNumber()
+    {
+      Random Random = new Random();
+      string Stem = Random.Next(0, 999999).ToString().PadLeft(6, '0'); ;
+      int PLVInteger = Random.Next(0, 31);
+      char PLVChar = PracticeLocationValueChars[PLVInteger];
+      int One = Convert.ToInt32(Stem.Substring(0, 1));
+      int Two = Convert.ToInt32(Stem.Substring(1, 1));
+      int Three = Convert.ToInt32(Stem.Substring(2, 1));
+      int Four = Convert.ToInt32(Stem.Substring(3, 1));
+      int Five = Convert.ToInt32(Stem.Substring(4, 1));
+      int Six = Convert.ToInt32(Stem.Substring(5, 1));
+      int CheckDigit = ((One * 3) + (Two * 5) + (Three * 8) + (Four * 4) + (Five * 2) + (Six) + (PLVInteger * 6)) % 11;
+      return Stem + PLVChar + RemainderCheckCharacterChars[CheckDigit].ToString();
+    }
 
     /// <summary>
     /// Static properties for HL7 V2 Messages

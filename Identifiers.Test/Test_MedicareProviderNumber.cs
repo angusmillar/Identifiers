@@ -37,6 +37,16 @@ namespace Identifiers.Test
       Assert.IsTrue(Australian.MedicareProviderNumber.IsValid(MedicareProviderNumber));
     }
 
+    [TestMethod]
+    public void Test_MedicareProviderNumberGeneration()
+    {
+      for (int i = 0; i < 100000; i++)
+      {
+        string MedicareProviderNumber = Australian.MedicareProviderNumber.GenerateRandomMedicareProviderNumber();
+        Assert.IsTrue(Australian.MedicareProviderNumber.IsValid(MedicareProviderNumber));
+
+      }
+    }
 
   }
 }

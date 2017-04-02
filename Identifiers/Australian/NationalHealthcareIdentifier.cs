@@ -36,8 +36,8 @@ namespace Identifiers.Australian
     #region Private properties
         
     private string _ValidatationErrorMessage = string.Empty;
-    private readonly string _ValidIndustryCode = "80";
-    private readonly string _ValidCountryCode = "036";
+    private static readonly string _ValidIndustryCode = "80";
+    private static readonly string _ValidCountryCode = "036";
     
 
     #endregion
@@ -217,10 +217,10 @@ namespace Identifiers.Australian
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public string GenerateRandomHealthcareIdentifier(NationalHealthcareIdentifierType type)
-    {
+    public static string GenerateRandomHealthcareIdentifier(NationalHealthcareIdentifierType type)
+    {      
       Random Random = new Random();
-      int RandomUniqueReference = Random.Next(0, 9);
+      int RandomUniqueReference = Random.Next(0, 999999999);
       string UniqueReferenceNumber = RandomUniqueReference.ToString().PadLeft(9, '0');
       string CheckDigit = CheckDigitAlgorithm.Luhn.GetCheckDigit(_ValidIndustryCode + _ValidCountryCode + GetNumberIssuerCodeForHealthcareIdentifierType(type) + UniqueReferenceNumber);
       var oID = new NationalHealthcareIdentifier(_ValidIndustryCode + _ValidCountryCode + GetNumberIssuerCodeForHealthcareIdentifierType(type) + UniqueReferenceNumber + CheckDigit);     
@@ -347,7 +347,7 @@ namespace Identifiers.Australian
     /// </summary>
     /// <param name="Type"></param>
     /// <returns></returns>
-    private string GetNumberIssuerCodeForHealthcareIdentifierType(NationalHealthcareIdentifierType Type)
+    private static string GetNumberIssuerCodeForHealthcareIdentifierType(NationalHealthcareIdentifierType Type)
     {
       switch (Type)
       {
