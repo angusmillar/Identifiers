@@ -16,6 +16,23 @@ namespace Identifiers.Test
     }
 
     [TestMethod]
+    public void Test_HPI_I_IsValid_True()
+    {
+      string ValidIhi = "8003610001218573";
+      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
+      Assert.IsTrue(oIhi.IsValid());
+    }
+
+
+    [TestMethod]
+    public void Test_HPI_I_IsValid_CheckDigit_Fasle()
+    {
+      string ValidIhi = "8003610001218577";
+      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
+      Assert.IsFalse(oIhi.IsValid());
+    }
+
+    [TestMethod]
     public void Test_IHI_IsValid_False()
     {
       //037 should be 036 
