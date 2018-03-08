@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Identifiers;
+using Identifiers.Australian.MedicareProviderNumber;
 
 namespace Identifiers.Test
 {
@@ -8,43 +8,40 @@ namespace Identifiers.Test
   public class Test_MedicareProviderNumber
   {
     [TestMethod]
+    [TestCategory("Medicare Provider Number")]
     public void Test_ValidMedicareProviderNumber()
     {
-      string MedicareProviderNumber = "2940675Y";      
-      Australian.MedicareProviderNumber oMedicareProviderNumber = new Australian.MedicareProviderNumber(MedicareProviderNumber);
-      Assert.IsTrue(oMedicareProviderNumber.IsValid());
+      string Number = "2940675Y";
+      IMedicareProviderNumberParser Parser = new MedicareProviderNumberParser();
+      IMedicareProviderNumber MedicareProviderNumber;
+      Assert.IsTrue(Parser.TryParse(Number, out MedicareProviderNumber));
+      Assert.AreEqual(Number, MedicareProviderNumber.Value);
+      Assert.AreEqual("294067", MedicareProviderNumber.Stem);
+      Assert.AreEqual("5", MedicareProviderNumber.LocationCharacter);
+      Assert.AreEqual("Y", MedicareProviderNumber.CheckCharacter);        
     }
 
     [TestMethod]
+    [TestCategory("Medicare Provider Number")]
     public void Test_InValidMedicareProviderNumber()
     {
-      string MedicareProviderNumber = "2940975Y";
-      Australian.MedicareProviderNumber oMedicareProviderNumber = new Australian.MedicareProviderNumber(MedicareProviderNumber);
-      Assert.IsFalse(oMedicareProviderNumber.IsValid());
+      string Number = "2940975Y";
+      IMedicareProviderNumberParser Parser = new MedicareProviderNumberParser();
+      IMedicareProviderNumber MedicareProviderNumber;
+      Assert.IsFalse(Parser.TryParse(Number, out MedicareProviderNumber));
     }
 
     [TestMethod]
-    public void Test_InValidMedicareProviderNumberStaticMethod()
-    {
-      string MedicareProviderNumber = "2940975Y";
-      Assert.IsFalse(Australian.MedicareProviderNumber.IsValid(MedicareProviderNumber));      
-    }
-
-    [TestMethod]
-    public void Test_ValidMedicareProviderNumberStaticMethod()
-    {
-      string MedicareProviderNumber = "2940675Y";
-      Assert.IsTrue(Australian.MedicareProviderNumber.IsValid(MedicareProviderNumber));
-    }
-
-    [TestMethod]
+    [TestCategory("Medicare Provider Number")]
     public void Test_MedicareProviderNumberGeneration()
     {
+      IMedicareProviderNumberGenerator MedicareProviderNumberGenerator = new MedicareProviderNumberGenerator();
+      IMedicareProviderNumberParser Parser = new MedicareProviderNumberParser();
+      
       for (int i = 0; i < 100000; i++)
       {
-        string MedicareProviderNumber = Australian.MedicareProviderNumber.GenerateRandomMedicareProviderNumber();
-        Assert.IsTrue(Australian.MedicareProviderNumber.IsValid(MedicareProviderNumber));
-
+        IMedicareProviderNumber MedicareProviderNumber;
+        Assert.IsTrue(Parser.TryParse(MedicareProviderNumberGenerator.Generate(), out MedicareProviderNumber));
       }
     }
 

@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Test_DVANumber.cs" />
     <Compile Include="Test_MedicareProviderNumber.cs" />
     <Compile Include="Test_MedicareNumber.cs" />
     <Compile Include="Test_NationalHealthcareIdentifier.cs" />

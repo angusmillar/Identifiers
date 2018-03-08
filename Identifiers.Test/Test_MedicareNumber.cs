@@ -1,74 +1,81 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Identifiers;
+using Identifiers.Australian.MedicareNumber;
 
 namespace Identifiers.Test
 {
   [TestClass]
+  
   public class Test_MedicareNumber
   {
     [TestMethod]
+    [TestCategory("Medicare Number")]
     public void Test_ValidMedicareNumberWithIrn()
     {
       string MedicareNumber = "6140523093";
       string Irn = "1";
-      Australian.MedicareNumber oMedNumber = new Australian.MedicareNumber(MedicareNumber, Irn);
-      Assert.IsTrue(oMedNumber.IsValid());
+
+      IMedicareNumberParser Parser = new MedicareNumberParser();
+      IMedicareNumber MedNum;      
+      Assert.IsTrue(Parser.TryParse(MedicareNumber + Irn, out MedNum));
+      Assert.AreEqual(MedicareNumber, MedNum.Value);
+      Assert.AreEqual(Irn, MedNum.IRN);
+      Assert.AreEqual("9", MedNum.Checksum);
+      Assert.AreEqual("3", MedNum.IssueNumber);
+      
     }
 
     [TestMethod]
+    [TestCategory("Medicare Number")]
     public void Test_ValidMedicareNumberNoIrn()
     {
-      string MedicareNumber = "6140523093";      
-      Australian.MedicareNumber oMedNumber = new Australian.MedicareNumber(MedicareNumber);
-      Assert.IsTrue(oMedNumber.IsValid());
+      string MedicareNumber = "6140523093";
+      IMedicareNumberParser Parser = new MedicareNumberParser();
+      IMedicareNumber MedNum;
+      Assert.IsTrue(Parser.TryParse(MedicareNumber, out MedNum));
+      Assert.AreEqual(MedicareNumber, MedNum.Value);
+      Assert.AreEqual(string.Empty, MedNum.IRN);
+      Assert.AreEqual("9", MedNum.Checksum);
+      Assert.AreEqual("3", MedNum.IssueNumber);
     }
 
     [TestMethod]
-    public void Test_ValidMedicareNumberNoIrnStaticMethod()
+    [TestCategory("Medicare Number")]
+    public void Test_NonValidMedicareNumber()
     {
-      string MedicareNumberNoIrn = "6140523093";      
-      Assert.IsTrue(Australian.MedicareNumber.IsValid(MedicareNumberNoIrn));
+      string MedicareNumber = "614dsf4393";
+      IMedicareNumberParser Parser = new MedicareNumberParser();
+      IMedicareNumber MedNum;
+      Assert.IsFalse(Parser.TryParse(MedicareNumber, out MedNum));
+     
     }
 
     [TestMethod]
-    public void Test_ValidMedicareNumberWithIrnStaticMethod()
-    {
-      string MedicareNumberWithIrn = "61405230931";      
-      Assert.IsTrue(Australian.MedicareNumber.IsValid(MedicareNumberWithIrn));
-    }
-
-    [TestMethod]
-    public void Test_InValidMedicareNumberWithIrnStaticMethod()
-    {
-      string MedicareNumberWithIrn = "61405230331";
-      Assert.IsFalse(Australian.MedicareNumber.IsValid(MedicareNumberWithIrn));
-    }
-
-    [TestMethod]
-    public void Test_InValidMedicareNumberNoIrnStaticMethod()
-    {
-      string MedicareNumberNoIrn = "6140523393";
-      Assert.IsFalse(Australian.MedicareNumber.IsValid(MedicareNumberNoIrn));
-    }
-
-    [TestMethod]
+    [TestCategory("Medicare Number")]
     public void Test_MedicareNumberGenerationWithNoIRNStaticMethod()
     {
+      IMedicareMedicareNumberGenerator MedicareMedicareNumberGenerator = new MedicareMedicareNumberGenerator();
+
       for (int i = 0; i < 100000; i++)
       {
-        string MedicareNumberNoIrn = Australian.MedicareNumber.GenerateRandomMedicareNumber(false);
-        Assert.IsTrue(Australian.MedicareNumber.IsValid(MedicareNumberNoIrn));
+        string MedicareNumberNoIrn = MedicareMedicareNumberGenerator.Generate(false);
+        IMedicareNumberParser Parser = new MedicareNumberParser();
+        IMedicareNumber MedNum;
+        Assert.IsTrue(Parser.TryParse(MedicareNumberNoIrn, out MedNum));        
       }
     }
 
     [TestMethod]
+    [TestCategory("Medicare Number")]
     public void Test_MedicareNumberGenerationWithIRNStaticMethod()
     {
+      MedicareMedicareNumberGenerator MedicareMedicareNumberGenerator = new MedicareMedicareNumberGenerator();
       for (int i = 0; i < 100000; i++)
       {
-        string MedicareNumberWithIrn = Australian.MedicareNumber.GenerateRandomMedicareNumber(true);
-        Assert.IsTrue(Australian.MedicareNumber.IsValid(MedicareNumberWithIrn));
+        string MedicareNumberNoIrn = MedicareMedicareNumberGenerator.Generate(true);
+        IMedicareNumberParser Parser = new MedicareNumberParser();
+        IMedicareNumber MedNum;
+        Assert.IsTrue(Parser.TryParse(MedicareNumberNoIrn, out MedNum));        
       }
     }
   }

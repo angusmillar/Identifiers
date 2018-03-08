@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Identifiers;
+using Identifiers.Australian.NationalHealthcareIdentifier;
+using Identifiers.Support.StandardsInformation.Australian;
 
 namespace Identifiers.Test
 {
@@ -8,209 +9,122 @@ namespace Identifiers.Test
   public class Test_NationalHealthcareIdentifier
   {
     [TestMethod]
+    [TestCategory("IHI Number")]
     public void Test_IHI_IsValid_True()
     {
-      string ValidIhi = "8003608333428779";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      Assert.IsTrue(oIhi.IsValid());
+      string Value = "8003608333428779";
+      IIndividualHealthcareIdentifier IHI;
+      IIndividualHealthcareIdentifierParser Parser = new IndividualHealthcareIdentifierParser();
+      Assert.IsTrue(Parser.TryParse(Value, out IHI));
+      Assert.AreEqual("80", IHI.IndustryCode);
+      Assert.AreEqual("036", IHI.CountryCode);
+      Assert.AreEqual("0", IHI.NumberIssuerCode);
+      Assert.AreEqual("833342877", IHI.UniqueReference);
+      Assert.AreEqual("9", IHI.CheckDigit);
+      Assert.AreEqual(Value, IHI.Value);
     }
 
     [TestMethod]
+    [TestCategory("HPI-I Number")]
     public void Test_HPI_I_IsValid_True()
     {
-      string ValidIhi = "8003610001218573";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      Assert.IsTrue(oIhi.IsValid());
+      string Value = "8003610001218573";
+      IHealthcareProviderIdentifierIndividual HPII;
+      IHealthcareProviderIdentifierIndividualParser Parser = new HealthcareProviderIdentifierIndividualParser();
+      Assert.IsTrue(Parser.TryParse(Value, out HPII));
+      Assert.AreEqual("80", HPII.IndustryCode);
+      Assert.AreEqual("036", HPII.CountryCode);
+      Assert.AreEqual("1", HPII.NumberIssuerCode);
+      Assert.AreEqual("000121857", HPII.UniqueReference);
+      Assert.AreEqual("3", HPII.CheckDigit);
+      Assert.AreEqual(Value, HPII.Value);
+
     }
 
 
     [TestMethod]
+    [TestCategory("HPI-I Number")]
     public void Test_HPI_I_IsValid_CheckDigit_Fasle()
     {
-      string ValidIhi = "8003610001218577";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      Assert.IsFalse(oIhi.IsValid());
+      string Value = "8003610001218577";
+      IHealthcareProviderIdentifierIndividual HPII;
+      IHealthcareProviderIdentifierIndividualParser Parser = new HealthcareProviderIdentifierIndividualParser();
+      Assert.IsFalse(Parser.TryParse(Value, out HPII));      
     }
 
     [TestMethod]
+    [TestCategory("IHI Number")]
     public void Test_IHI_IsValid_False()
     {
       //037 should be 036 
-      string ValidIhi = "8003708333428779";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      Assert.IsFalse(oIhi.IsValid());
+      string Value = "8003708333428779";
+      IIndividualHealthcareIdentifier IHI;
+      IIndividualHealthcareIdentifierParser Parser = new IndividualHealthcareIdentifierParser();
+      Assert.IsFalse(Parser.TryParse(Value, out IHI));
     }
 
-    [TestMethod]
-    public void Test_IHI_IsValidCheckDigit_True()
-    {
-      string ValidIhi = "8003608333428779";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      Assert.IsTrue(oIhi.IsValidCheckDigit());
-    }
 
     [TestMethod]
-    public void Test_IHI_IsValidCheckDigit_Fasle()
-    {
-      string ValidIhi = "8003608333428778";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      Assert.IsFalse(oIhi.IsValidCheckDigit());
-    }
-
-    [TestMethod]
-    public void Test_IHI_HealthcareIdentifierType_IsIHI_True()
-    {
-      string ValidIhi = "8003608333428779";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      Assert.IsTrue(oIhi.HealthcareIdentifierType == Australian.NationalHealthcareIdentifierType.Individual);
-    }
-
-    [TestMethod]
-    public void Test_IHI_HealthcareIdentifierType_IsHPI_I_True()
-    {
-      string ValidIhi = "8003618333428779";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      Assert.IsTrue(oIhi.HealthcareIdentifierType == Australian.NationalHealthcareIdentifierType.Provider);
-    }
-
-    [TestMethod]
+    [TestCategory("HPI-O Number")]
     public void Test_IHI_HealthcareIdentifierType_IsHPI_O_True()
     {
-      string ValidIhi = "8003628333428779";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      Assert.IsTrue(oIhi.HealthcareIdentifierType == Australian.NationalHealthcareIdentifierType.Orginisation);
+      string Value = "8003626499446203";
+      IHealthcareProviderIdentifierOrganisation HPIO;
+      IHealthcareProviderIdentifierOrganisationParser Parser = new HealthcareProviderIdentifierOrganisationParser();
+      Assert.IsTrue(Parser.TryParse(Value, out HPIO));
+      Assert.AreEqual("80", HPIO.IndustryCode);
+      Assert.AreEqual("036", HPIO.CountryCode);
+      Assert.AreEqual("2", HPIO.NumberIssuerCode);
+      Assert.AreEqual("649944620", HPIO.UniqueReference);
+      Assert.AreEqual("3", HPIO.CheckDigit);
+      Assert.AreEqual(Value, HPIO.Value);
     }
 
+
+
     [TestMethod]
-    public void Test_IHI_HealthcareIdentifierType_IsWrong()
+    [TestCategory("IHI Number")]
+    public void Test_GenerateRandomIHI()
     {
-      string ValidIhi = "8003638333428779";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      Assert.IsTrue(oIhi.HealthcareIdentifierType == Australian.NationalHealthcareIdentifierType.None);
+      IIndividualHealthcareIdentifierGenerator Generator = new IndividualHealthcareIdentifierGenerator();
+      string NewRandom = Generator.Generate();
+      IIndividualHealthcareIdentifier IHI;
+      IIndividualHealthcareIdentifierParser Parser = new IndividualHealthcareIdentifierParser();
+      Assert.IsTrue(Parser.TryParse(NewRandom, out IHI));
     }
 
     [TestMethod]
-    public void Test_IHI_HealthcareIdentifierType_IsWrong_IsValid_False()
+    [TestCategory("HPI-I Number")]
+    public void Test_GenerateRandomHPI_I()
     {
-      string ValidIhi = "8003638333428779";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      Assert.IsFalse(oIhi.IsValid());
+      IHealthcareProviderIdentifierIndividualGenerator Generator = new HealthcareProviderIdentifierIndividualGenerator();
+      string NewRandom = Generator.Generate();
+      IHealthcareProviderIdentifierIndividual HPII;
+      IHealthcareProviderIdentifierIndividualParser Parser = new HealthcareProviderIdentifierIndividualParser();
+      Assert.IsTrue(Parser.TryParse(NewRandom, out HPII));
     }
 
     [TestMethod]
-    public void Test_IHI_GenerateRandomIHI()
+    [TestCategory("HPI-O Number")]
+    public void Test_GenerateRandomHPI_O()
     {
-      string NewRandom = Australian.NationalHealthcareIdentifier.GenerateRandomHealthcareIdentifier(Australian.NationalHealthcareIdentifierType.Individual);
-      Assert.IsTrue(Australian.NationalHealthcareIdentifier.IsValid(NewRandom, Australian.NationalHealthcareIdentifierType.Individual));
+      IHealthcareProviderIdentifierOrganisationGenerator Generator = new HealthcareProviderIdentifierOrganisationGenerator();
+      string NewRandom = Generator.Generate();
+      IHealthcareProviderIdentifierOrganisation HPIO;
+      IHealthcareProviderIdentifierOrganisationParser Parser = new HealthcareProviderIdentifierOrganisationParser();
+      Assert.IsTrue(Parser.TryParse(NewRandom, out HPIO));
     }
 
-    [TestMethod]
-    public void Test_IHI_GenerateRandomHPI_I()
-    {
-      string NewRandom = Australian.NationalHealthcareIdentifier.GenerateRandomHealthcareIdentifier(Australian.NationalHealthcareIdentifierType.Provider);
-      bool Result = Australian.NationalHealthcareIdentifier.IsValid(NewRandom, Australian.NationalHealthcareIdentifierType.Provider);
-      Assert.IsTrue(Result);
-    }
+
 
     [TestMethod]
-    public void Test_IHI_GenerateRandomHPI_O()
-    {
-      string NewRandom = Australian.NationalHealthcareIdentifier.GenerateRandomHealthcareIdentifier(Australian.NationalHealthcareIdentifierType.Orginisation);
-      Assert.IsTrue(Australian.NationalHealthcareIdentifier.IsValid(NewRandom, Australian.NationalHealthcareIdentifierType.Orginisation));
-    }
-
-    [TestMethod]
-    public void Test_IHIWhichIsToLong_IsValid_False()
-    {
-      string InValidIhi = "8003608333428779333";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(InValidIhi);
-      Assert.IsFalse(oIhi.IsValid());
-    }
-
-    [TestMethod]
-    public void Test_IHIWhichIstoShort_False()
-    {
-      string InValidIhi = "8003608333429";      
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(InValidIhi);
-      Assert.IsFalse(oIhi.IsValid());
-    }
-
-    [TestMethod]
-    public void Test_GetCheckDigit_Returns_Correct_CheckDigit()
-    {
-      string ValidIhiNoCheckDigit = "800360833342877";
-      string ValidIhi = ValidIhiNoCheckDigit  + Australian.NationalHealthcareIdentifier.GetCheckDigit(ValidIhiNoCheckDigit);
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
-      Assert.IsTrue(oIhi.IsValid());
-    }
-
-    [TestMethod]
+    [TestCategory("OID For National Identifiers")]
     public void Test_ValueWithRootOID_ReturnsCorrect()
-    {      
-      string ValidIhi = "8003608333428779";
-      Australian.NationalHealthcareIdentifier oIhi = new Australian.NationalHealthcareIdentifier(ValidIhi);
+    {            
+      NationalHealthcareIdentifierInfo Info = new NationalHealthcareIdentifierInfo();
       string RootOid = "1.2.36.1.2001.1003.0";
-      Assert.AreEqual(oIhi.ValueWithRootOID, RootOid + "." + ValidIhi);
+      Assert.AreEqual(RootOid, Info.RootHealthcareIdentifierOid);
     }
-
-    [TestMethod]
-    public void Test_OID_For_NationalIdentifers()
-    {
-      Assert.AreEqual(Australian.NationalHealthcareIdentifier.RootHealthcareIdentifierOid, "1.2.36.1.2001.1003.0");
-    }
-
-    [TestMethod]
-    public void Test_IHI_Hl7_V2_IdentifierTypeCode()
-    {     
-      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7V2.Ihi.IdentifierTypeCode, "NI");
-    }
-
-    [TestMethod]
-    public void Test_IHI_Hl7_V2_AssigningAuthority()
-    {
-      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7V2.Ihi.AssigningAuthority, "AUSHIC");
-    }
-
-    [TestMethod]
-    public void Test_HPI_I_Hl7_V2_AssigningAuthority()
-    {
-      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7V2.Hpi_I.AssigningAuthority, "AUSHIC");
-    }
-
-    [TestMethod]
-    public void Test_HPI_I_Hl7_V2_AssigningFacility()
-    {
-      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7V2.Hpi_I.AssigningFacility, "NPI");
-    }
-
-    [TestMethod]
-    public void Test_HPI_O_Hl7_V2_IdentifierTypeCode()
-    {
-      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7V2.Hpi_O.IdentifierTypeCode, "NOI");
-    }
-
-    [TestMethod]
-    public void Test_HPI_O_Hl7_V2_AssigningFacilityID()
-    {
-      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7V2.Hpi_O.AssigningFacilityID, "AUSHIC");
-    }
-
-    [TestMethod]
-    public void Test_IHI_Hl7_CDA_AssigningFacilityID()
-    {
-      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7Cda.Ihi.AssigningAuthorityName, "IHI");
-    }
-
-    [TestMethod]
-    public void Test_HPI_I_Hl7_CDA_AssigningFacilityID()
-    {
-      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7Cda.Hpi_I.AssigningAuthorityName, "HPI-I");
-    }
-
-    [TestMethod]
-    public void Test_HPI_O_Hl7_CDA_AssigningFacilityID()
-    {
-      Assert.AreEqual(Australian.NationalHealthcareIdentifier.Hl7Cda.Hpi_O.AssigningAuthorityName, "HPI-O");
-    }
+    
   }
 }
