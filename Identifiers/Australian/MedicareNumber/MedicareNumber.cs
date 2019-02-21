@@ -21,19 +21,19 @@ namespace Identifiers.Australian.MedicareNumber
     public string Checksum { get; internal set; }
 
     /// <summary>
-    /// Indicates how many times the card has been issued (1-digit)
+    /// Indicates how many times the card has been issued (1-digit) between 1 - 9
     /// </summary>
     public string IssueNumber { get; internal set; }
 
     /// <summary>
-    /// The IRN appears on the left of the cardholder's name on the medicare card 
+    /// The IRN appears on the left of the cardholder's name on the Medicare card 
     /// and distinguishes the individuals named on the card.
     /// </summary>
     public string IRN { get; internal set; }
 
     /// <summary>
     /// The expiry date of the Medicare Card
-    /// Defaults to null can be set independatly 
+    /// Defaults to null can be set independently 
     /// </summary>
     public DateTime? ExpiryDate { get; set; }
 

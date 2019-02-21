@@ -70,7 +70,10 @@ namespace Identifiers.Australian.MedicareNumber
 
       if (Med.IssueNumber.Length != 1)
         return false;
-      
+
+      if (Med.IssueNumber == "0")
+        return false;
+
       Med.IRN = Irn;
       if (Med.IRN != string.Empty)
       {

@@ -27,6 +27,23 @@ namespace Identifiers.Test
 
     [TestMethod]
     [TestCategory("Medicare Number")]
+    public void Test_ValidMedicareNumberZeroIssueNumber()
+    {
+      string MedicareNumber = "2273766560";
+      string Irn = "3";
+
+      IMedicareNumberParser Parser = new MedicareNumberParser();
+      IMedicareNumber MedNum;
+      Assert.IsFalse(Parser.TryParse(MedicareNumber + Irn, out MedNum));
+      //Assert.AreEqual(MedicareNumber, MedNum.Value);
+      //Assert.AreEqual(Irn, MedNum.IRN);
+      //Assert.AreEqual("6", MedNum.Checksum);
+      //Assert.AreEqual("0", MedNum.IssueNumber);
+
+    }
+
+    [TestMethod]
+    [TestCategory("Medicare Number")]
     public void Test_ValidMedicareNumberNoIrn()
     {
       string MedicareNumber = "6140523093";

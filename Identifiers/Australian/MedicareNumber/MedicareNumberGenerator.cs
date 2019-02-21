@@ -13,7 +13,7 @@ namespace Identifiers.Australian.MedicareNumber
       string IdNumber = (FirstChar.ToString() + Number.ToString().PadLeft(7, '0'));
       if (CheckDigitAlgorithm.MedicareNumberCheckDigit.GetCheckDigit(FirstChar.ToString() + Number.ToString().PadLeft(7, '0'), out string CheckDigit))
       {
-        int IssueNum = Random.Next(0, 9);
+        int IssueNum = Random.Next(1, 9);
         if (WithIRN)
         {
           return $"{IdNumber}{CheckDigit}{IssueNum}{Random.Next(1, 9)}";
